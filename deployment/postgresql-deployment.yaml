@@ -16,11 +16,21 @@ spec:
         image: postgres:latest
         env:
         - name: POSTGRES_DB
-          value: huynq-database
+          valueFrom:
+            configMapKeyRef:
+              name: huynq-configmap
+              key: DB_NAME
         - name: POSTGRES_USER
-          value: huynq
+          valueFrom: huynq
+          valueFrom:
+            configMapKeyRef:
+              name: huynq-configmap
+              key: DB_USERNAME
         - name: POSTGRES_PASSWORD
-          value: huynq-password
+          valueFrom:
+            secretKeyRef:
+              name: huynq-secret
+              key: DB_PASSWORD
         ports:
         - containerPort: 5432
         volumeMounts:
