@@ -12,6 +12,15 @@ from config import app, db
 
 port_number = int(os.environ.get("APP_PORT", 5153))
 
+class Token(db.Model):
+    __tablename__ = "tokens"
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, index=True, unique=False, nullable=False)
+    token = db.Column(db.String(6), index=True, unique=False, nullable=False)
+    created_at = db.Column(db.DateTime, index=False, unique=False, nullable=False, default=datetime.now())
+    used_at = db.Column(db.DateTime, index=True, unique=False, nullable=True)
+
 
 @app.route("/health_check")
 def health_check():
@@ -73,7 +82,7 @@ def all_user_visits():
             "visits": row[1],
             "joined_at": str(row[2])
         }
-    
+
     return jsonify(response)
 
 

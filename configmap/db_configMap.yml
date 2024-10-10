@@ -4,6 +4,6 @@ metadata:
   name: huynq-configmap
 data:
   DB_HOST: 10.100.129.99
-  DB_PORT: 5432
+  DB_PORT: "5432"
   DB_NAME: huynq-database
   DB_USERNAME: huynq
